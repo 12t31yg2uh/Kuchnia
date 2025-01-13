@@ -179,3 +179,48 @@
     <button id="clear-cart" onclick="clearCart()" style="display:none;">Wyczyść koszyk</button>
     <a id="checkout-btn" href="https://www.paypal.com/paypalme/TwojeKontoPayPal/19.99" class="button" style="display:none;">Przejdź do płatności</a>
 </div>
+<!-- Formularz rejestracji -->
+<div class="content">
+    <h2>Zarejestruj się</h2>
+    <form id="register-form">
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="password">Hasło:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <button type="submit" class="button">Zarejestruj się</button>
+    </form>
+</div>
+
+<!-- Formularz logowania -->
+<div class="content">
+    <h2>Zaloguj się</h2>
+    <form id="login-form">
+        <label for="login-email">E-mail:</label>
+        <input type="email" id="login-email" name="email" required><br><br>
+
+        <label for="login-password">Hasło:</label>
+        <input type="password" id="login-password" name="password" required><br><br>
+
+        <button type="submit" class="button">Zaloguj się</button>
+    </form>
+</div>
+Wysłano
+Napisz do:
+<!-- Formularz do dodawania przepisu -->
+<div class="content">
+    <h2>Podziel się przepisem</h2>
+    <form id="recipe-form">
+        <label for="recipe-title">Tytuł przepisu:</label>
+        <input type="text" id="recipe-title" name="title" required><br><br>
+
+        <label for="recipe-description">Opis przepisu:</label><br>
+        <textarea id="recipe-description" name="description" rows="4" required></textarea><br><br>
+
+        <label for="recipe-image">Dodaj zdjęcie:</label>
+        <input type="file" id="recipe-image" name="image"><br><br>
+
+        <button type="submit" class="button">Prześlij przepis</button>
+    </form>
+</div>
