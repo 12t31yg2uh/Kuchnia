@@ -152,3 +152,133 @@
                 const div = document
 Wysłano
 Napisz do:
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zakup planu treningowego</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 0;
+        }
+        header h1 {
+            margin: 0;
+        }
+        .content {
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .form-group input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        .form-group input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Zakup planu treningowego</h1>
+        <p>Wypełnij poniższy formularz, aby zakupić swój spersonalizowany plan treningowy.</p>
+    </header>
+
+    <div class="content">
+        <form id="training-plan-form" action="backend_endpoint_here" method="POST">
+            <!-- Dane użytkownika -->
+            <div class="form-group">
+                <label for="name">Imię i nazwisko:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Adres e-mail:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Wiek:</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            <div class="form-group">
+                <label for="gender">Płeć:</label>
+                <select id="gender" name="gender" required>
+                    <option value="male">Mężczyzna</option>
+                    <option value="female">Kobieta</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="goal">Cel treningowy:</label>
+                <select id="goal" name="goal" required>
+                    <option value="weight_loss">Utrata wagi</option>
+                    <option value="muscle_gain">Przyrost mięśni</option>
+                    <option value="general_fitness">Ogólna kondycja</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="payment">Kwota: 199,99 zł</label>
+                <!-- Możliwość płatności, np. przycisk PayPal lub Stripe -->
+                <input type="submit" value="Przejdź do płatności">
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        © 2025 TwojeImię - Wszystkie prawa zastrzeżone.
+    </footer>
+
+    <script>
+        document.getElementById('training-plan-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+
+            // Wysyłanie danych na backend (np. do systemu płatności i generowania planu)
+            fetch('backend_endpoint_here', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Płatność zakończona sukcesem! Plan treningowy zostanie wysłany na Twój e-mail.');
+                } else {
+                    alert('Wystąpił błąd podczas płatności. Spróbuj ponownie.');
+                }
+            })
+            .catch(error => {
+                alert('Wystąpił błąd. Spróbuj ponownie.');
+            });
+        });
+    </script>
+</body>
+</html>
