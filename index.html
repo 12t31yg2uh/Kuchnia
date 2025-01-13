@@ -50,31 +50,23 @@
             font-size: 14px;
         }
         .cart {
+            margin-top: 30px;
+            text-align: left;
+        }
+        .cart-items {
+            border-top: 1px solid #ddd;
             margin-top: 20px;
+            padding-top: 10px;
         }
         .cart-items ul {
             list-style-type: none;
             padding: 0;
         }
         .cart-items li {
-            padding: 10px 0;
-            border-bottom: 1px solid #ddd;
-        }
-        .cart-items button {
-            background-color: #ff6f61;
-            color: white;
-            padding: 5px 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-        }
-        .cart-items button:hover {
-            background-color: #e0554c;
+            margin-bottom: 10px;
         }
         .total-price {
-            margin-top: 20px;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
         }
     </style>
@@ -85,16 +77,24 @@
     </header>
     <div class="content">
         <h2>Gotuj łatwo i smacznie</h2>
-        <p>Poznaj 50 sprawdzonych przepisów na każdą okazję!</p>
-        <p>Cena: <strong>19.99 PLN</strong></p>
+        <p>
+            Poznaj 50 sprawdzonych przepisów na każdą okazję! 
+            E-book zawiera szczegółowe instrukcje, zdjęcia i wiele inspiracji kulinarnych.
+        </p>
+        <p>
+            Cena: <strong>19.99 PLN</strong>
+        </p>
         <button class="button" onclick="addToCart('E-book Kulinarne Inspiracje', 19.99)">Dodaj do koszyka</button>
         
-        <div class="cart-items">
-            <h3>Twój Koszyk:</h3>
-            <ul id="cart-list"></ul>
-            <p class="total-price">Całkowita cena: <span id="total-price">0.00</span> PLN</p>
-            <button id="clear-cart" onclick="clearCart()" style="display:none;">Wyczyść koszyk</button>
-            <a id="checkout-btn" href="#" class="button" style="display:none;">Przejdź do płatności</a>
+        <!-- Sekcja koszyka -->
+        <div class="cart">
+            <h3>Twój koszyk:</h3>
+            <div class="cart-items">
+                <ul id="cart-list"></ul>
+                <p class="total-price">Całkowita cena: <span id="total-price">0.00</span> PLN</p>
+                <button class="button" id="checkout" style="display: none;" onclick="checkout()">Przejdź do płatności</button>
+                <button class="button" id="clear-cart" style="display: none;" onclick="clearCart()">Wyczyść koszyk</button>
+            </div>
         </div>
     </div>
     <footer>
@@ -102,57 +102,58 @@
     </footer>
 
     <script>
-        // Funkcja dodająca produkt do koszyka
+        // Koszyk w pamięci przeglądarki
+        const cart = [];
+
+        // Dodaj produkt do koszyka
         function addToCart(name, price) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            let existingProduct = cart.find(item => item.name === name);
-
-            if (existingProduct) {
-                existingProduct.quantity += 1;
-            } else {
-                cart.push({ name, price, quantity: 1 });
-            }
-
-            localStorage.setItem('cart', JSON.stringify(cart));
+            cart.push({ name, price });
             updateCart();
         }
 
-        // Funkcja usuwająca produkt z koszyka
-        function removeFromCart(index) {
-            let cart = JSON.parse(localStorage.getItem('cart'));
-            cart.splice(index, 1);
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCart();
-        }
-
-        // Funkcja czyszcząca koszyk
-        function clearCart() {
-            localStorage.removeItem('cart');
-            updateCart();
-        }
-
-        // Funkcja aktualizująca widok koszyka
+        // Zaktualizuj widok koszyka
         function updateCart() {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            let cartList = document.getElementById('cart-list');
-            let totalPriceElement = document.getElementById('total-price');
-            let clearCartButton = document.getElementById('clear-cart');
-            let checkoutButton = document.getElementById('checkout-btn');
+            const cartList = document.getElementById('cart-list');
+            const totalPrice = document.getElementById('total-price');
+            const checkoutButton = document.getElementById('checkout');
+            const clearCartButton = document.getElementById('clear-cart');
 
+            // Wyczyść widok koszyka
             cartList.innerHTML = '';
-            let totalPrice = 0;
+
+            let total = 0;
 
             cart.forEach((item, index) => {
-                totalPrice += item.price * item.quantity;
-                cartList.innerHTML += `
-                    <li>
-                        ${item.name} - ${item.quantity} x ${item.price.toFixed(2)} PLN
-                        <button onclick="removeFromCart(${index})">Usuń</button>
-                    </li>
-                `;
+                total += item.price;
+                const li = document.createElement('li');
+                li.innerHTML = `${item.name} - ${item.price.toFixed(2)} PLN 
+                <button onclick="removeFromCart(${index})">Usuń</button>`;
+                cartList.appendChild(li);
             });
 
-            totalPriceElement.textContent = totalPrice.toFixed(2);
+            totalPrice.textContent = total.toFixed(2);
+            checkoutButton.style.display = cart.length > 0 ? 'inline-block' : 'none';
+            clearCartButton.style.display = cart.length > 0 ? 'inline-block' : 'none';
+        }
 
-            // Pokaż lub ukryj przyciski w zależności od koszyka
-            if (cart.
+        // Usuń produkt z koszyka
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        // Wyczyść koszyk
+        function clearCart() {
+            cart.length = 0;
+            updateCart();
+        }
+
+        // Przejdź do płatności
+        function checkout() {
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const paymentLink = https://www.paypal.com/paypalme/TwojeKontoPayPal/${total.toFixed(2)};
+            window.location.href = paymentLink;
+        }
+    </script>
+</body>
+</html>
