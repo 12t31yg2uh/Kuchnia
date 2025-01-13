@@ -351,3 +351,57 @@ Napisz do:
 </script>
 Wysłano
 Napisz do:
+<script>
+    // Formularz newslettera
+    document.getElementById('newsletter-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const email = document.getElementById('email').value;
+
+        // Przykład wysyłki danych z formularza newslettera
+        fetch('twojbackendemail@domena.com', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: email })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Dziękujemy za zapisanie się do newslettera!');
+            } else {
+                alert('Wystąpił błąd. Spróbuj ponownie.');
+            }
+        })
+        .catch(error => {
+            alert('Wystąpił błąd. Spróbuj ponownie.');
+        });
+    });
+
+    // Formularz zakupu planu treningowego
+    document.getElementById('training-plan-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+
+        // Wysyłanie danych na backend (np. do systemu płatności i generowania planu)
+        fetch('backend_endpoint_here', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Płatność zakończona sukcesem! Plan treningowy zostanie wysłany na Twój e-mail.');
+            } else {
+                alert('Wystąpił błąd podczas płatności. Spróbuj ponownie.');
+            }
+        })
+        .catch(error => {
+            alert('Wystąpił błąd. Spróbuj ponownie.');
+        });
+    });
+</script>
+Wysłano
+Napisz do:
