@@ -365,3 +365,15 @@ Napisz do:
         font-size: 14px;
     }
 }
+body {
+    background-image: url('background1.jpg');
+    background-size: cover;
+    background-position: center;
+    animation: backgroundChange 10s infinite alternate;
+}
+
+@keyframes backgroundChange {
+    0% { background-image: url('background1.jpg'); }
+    50% { background-image: url('background2.jpg'); }
+    100% { background-image: url('background3.jpg'); }
+}
