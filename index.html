@@ -49,97 +49,8 @@
             color: white;
             font-size: 14px;
         }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Mój E-book Kulinarne Inspiracje</h1>
-    </header>
-    <div class="content">
-        <h2>Gotuj łatwo i smacznie</h2>
-        <p>
-            Poznaj 50 sprawdzonych przepisów na każdą okazję! 
-            E-book zawiera szczegółowe instrukcje, zdjęcia i wiele inspiracji kulinarnych.
-        </p>
-        <p>
-            Cena: <strong>19.99 PLN</strong>
-        </p>
-        <a href="https://www.paypal.com/paypalme/TwojeKontoPayPal/19.99" class="button">Kup teraz</a>
-    </div>
-    <footer>
-        © 2025 TwojeImię - Wszystkie prawa zastrzeżone.
-    </footer>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sprzedaż E-booka</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
-            text-align: center;
-        }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px 0;
-        }
-        header h1 {
-            margin: 0;
-        }
-        .content {
-            margin: 20px auto;
-            max-width: 800px;
-            padding: 20px;
-            background: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-        .button {
-            display: inline-block;
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 18px;
-            margin-top: 20px;
-        }
-        .button:hover {
-            background-color: #45a049;
-        }
-        footer {
-            margin-top: 20px;
-            padding: 10px 0;
-            background: #333;
-            color: white;
-            font-size: 14px;
-        }
         .cart {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             margin-top: 20px;
-        }
-        .cart button {
-            background-color: #ff6f61;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 18px;
-        }
-        .cart-items {
-            margin-top: 20px;
-            text-align: left;
-            padding-top: 10px;
-            border-top: 1px solid #ddd;
         }
         .cart-items ul {
             list-style-type: none;
@@ -155,6 +66,11 @@
             padding: 5px 10px;
             font-size: 16px;
             border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .cart-items button:hover {
+            background-color: #e0554c;
         }
         .total-price {
             margin-top: 20px;
@@ -169,28 +85,16 @@
     </header>
     <div class="content">
         <h2>Gotuj łatwo i smacznie</h2>
-        <p>
-            Poznaj 50 sprawdzonych przepisów na każdą okazję! 
-            E-book zawiera szczegółowe instrukcje, zdjęcia i wiele inspiracji kulinarnych.
-        </p>
-        <p>
-            Cena: <strong>19.99 PLN</strong>
-        </p>
+        <p>Poznaj 50 sprawdzonych przepisów na każdą okazję!</p>
+        <p>Cena: <strong>19.99 PLN</strong></p>
+        <button class="button" onclick="addToCart('E-book Kulinarne Inspiracje', 19.99)">Dodaj do koszyka</button>
         
-        <!-- Przycisk dodania do koszyka -->
-        <div class="cart">
-            <button class="button" onclick="addToCart('E-book Kulinarne Inspiracje', 19.99)">Dodaj do koszyka</button>
-        </div>
-        
-        <!-- Koszyk -->
         <div class="cart-items">
             <h3>Twój Koszyk:</h3>
-            <ul id="cart-list">
-                <!-- Lista produktów w koszyku -->
-            </ul>
-            <p class="total-price">Całkowita cena: <span id="total-price">0</span> PLN</p>
+            <ul id="cart-list"></ul>
+            <p class="total-price">Całkowita cena: <span id="total-price">0.00</span> PLN</p>
             <button id="clear-cart" onclick="clearCart()" style="display:none;">Wyczyść koszyk</button>
-            <a id="checkout-btn" href="https://www.paypal.com/paypalme/TwojeKontoPayPal/19.99" class="button" style="display:none;">Przejdź do płatności</a>
+            <a id="checkout-btn" href="#" class="button" style="display:none;">Przejdź do płatności</a>
         </div>
     </div>
     <footer>
@@ -198,41 +102,57 @@
     </footer>
 
     <script>
-        // Funkcja do dodawania produktów do koszyka
+        // Funkcja dodająca produkt do koszyka
         function addToCart(name, price) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-            // Sprawdzamy, czy produkt już jest w koszyku
             let existingProduct = cart.find(item => item.name === name);
+
             if (existingProduct) {
                 existingProduct.quantity += 1;
             } else {
-                cart.push({name: name, price: price, quantity: 1});
+                cart.push({ name, price, quantity: 1 });
             }
 
-            // Zapisujemy koszyk do localStorage
             localStorage.setItem('cart', JSON.stringify(cart));
-
-            // Aktualizujemy widok koszyka
             updateCart();
         }
 
-        // Funkcja do usuwania produktów z koszyka
+        // Funkcja usuwająca produkt z koszyka
         function removeFromCart(index) {
             let cart = JSON.parse(localStorage.getItem('cart'));
             cart.splice(index, 1);
             localStorage.setItem('cart', JSON.stringify(cart));
-
-            // Aktualizujemy widok koszyka
             updateCart();
         }
 
-        // Funkcja do czyszczenia koszyka
+        // Funkcja czyszcząca koszyk
         function clearCart() {
             localStorage.removeItem('cart');
             updateCart();
         }
 
-        // Funkcja do aktualizowania widoku koszyka
+        // Funkcja aktualizująca widok koszyka
         function updateCart() {
-            let cart = JSON.parse(localStorage.getItem('cart')
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartList = document.getElementById('cart-list');
+            let totalPriceElement = document.getElementById('total-price');
+            let clearCartButton = document.getElementById('clear-cart');
+            let checkoutButton = document.getElementById('checkout-btn');
+
+            cartList.innerHTML = '';
+            let totalPrice = 0;
+
+            cart.forEach((item, index) => {
+                totalPrice += item.price * item.quantity;
+                cartList.innerHTML += `
+                    <li>
+                        ${item.name} - ${item.quantity} x ${item.price.toFixed(2)} PLN
+                        <button onclick="removeFromCart(${index})">Usuń</button>
+                    </li>
+                `;
+            });
+
+            totalPriceElement.textContent = totalPrice.toFixed(2);
+
+            // Pokaż lub ukryj przyciski w zależności od koszyka
+            if (cart.
