@@ -3,553 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ćwiczenia Fizyczne - Plany i Rozpiski</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
-            text-align: center;
-        }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px 0;
-        }
-        header h1 {
-            margin: 0;
-        }
-        .content {
-            margin: 20px auto;
-            max-width: 900px;
-            padding: 20px;
-            background: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-        .exercise-category {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-        }
-        .exercise-category div {
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px;
-            margin: 10px;
-            border-radius: 10px;
-            width: 30%;
-            cursor: pointer;
-        }
-        .exercise-category div:hover {
-            background-color: #45a049;
-        }
-        .exercise-list {
-            margin-top: 30px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-        }
-        .exercise-item {
-            background: #ffffff;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            margin: 10px;
-            padding: 15px;
-            width: 45%;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        .exercise-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-        }
-        footer {
-            margin-top: 30px;
-            padding: 10px 0;
-            background: #333;
-            color: white;
-            font-size: 14px;
-        }
-        .newsletter {
-            margin-top: 20px;
-        }
-        .newsletter input[type="email"] {
-            padding: 10px;
-            border-radius: 5px;
-            width: 250px;
-        }
-        .newsletter input[type="submit"] {
-            padding: 10px 15px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .newsletter input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-    </style>
+    <title>Sprzedaż E-booków Kulinarne</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Ćwiczenia Fizyczne - Plany i Rozpiski</h1>
-        <p>Znajdź idealne ćwiczenia dla siebie i popraw swoją kondycję!</p>
+        <h1>Witaj w sklepie z e-bookami kulinarnymi</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Strona Główna</a></li>
+                <li><a href="#ebook">E-booki</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <div class="content">
-        <h2>Wybierz kategorię ćwiczeń</h2>
-        <div class="exercise-category">
-            <div onclick="showExercises('cardio')">Cardio</div>
-            <div onclick="showExercises('strength')">Siłowe</div>
-            <div onclick="showExercises('flexibility')">Elastyczność</div>
-        </div>
+    <section id="home">
+        <h2>Oferujemy najlepsze e-booki kulinarne</h2>
+        <p>Znajdziesz tutaj przepisy na różne dania, które możesz zrobić w swoim domu!</p>
+    </section>
 
-        <div class="exercise-list" id="exercise-list">
-            <!-- Lista ćwiczeń zostanie załadowana tutaj -->
-        </div>
+    <section id="ebook">
+        <h2>E-book: Przepisy Kulinarnych Smaków</h2>
+        <p>Chcesz poznać najlepsze przepisy na pyszne dania? Pobierz nasz e-book za 19,99 PLN.</p>
+        <a href="#" class="buy-button">Kup teraz</a>
+    </section>
 
-        <div class="newsletter">
-            <h3>Zapisz się na newsletter, aby otrzymywać plany treningowe!</h3>
-            <form id="newsletter-form">
-                <input type="email" id="email" placeholder="Wprowadź swój email" required>
-                <input type="submit" value="Zapisz się">
-            </form>
-        </div>
-    </div>
+    <section id="contact">
+        <h2>Kontakt</h2>
+        <p>Masz pytania? Skontaktuj się z nami.</p>
+    </section>
 
     <footer>
-        © 2025 TwojeImię - Wszystkie prawa zastrzeżone.
+        <p>&copy; 2025 Sklep z E-bookami Kulinarnej Sztuki</p>
     </footer>
-
-    <script>
-        const exercises = {
-            cardio: [
-                { title: "Bieganie", description: "Wspaniałe ćwiczenie na poprawę kondycji." },
-                { title: "Skakanka", description: "Świetne na spalanie tłuszczu i poprawę wydolności." },
-                { title: "Rower stacjonarny", description: "Skuteczna forma ćwiczeń cardio na nogi." },
-            ],
-            strength: [
-                { title: "Pompki", description: "Wzmacniają klatkę piersiową, ramiona i triceps." },
-                { title: "Przysiady", description: "Ćwiczenie na nogi i pośladki." },
-                { title: "Martwy ciąg", description: "Siłowe ćwiczenie na plecy i nogi." },
-            ],
-            flexibility: [
-                { title: "Stretching", description: "Zwiększa elastyczność mięśni i poprawia mobilność." },
-                { title: "Yoga", description: "Skuteczne ćwiczenia na elastyczność i równowagę." },
-                { title: "Pilates", description: "Pomaga w poprawie postawy i elastyczności." },
-            ]
-        };
-
-        function showExercises(category) {
-            const exerciseList = document.getElementById('exercise-list');
-            exerciseList.innerHTML = '';
-
-            exercises[category].forEach(exercise => {
-                const div = document
-Wysłano
-Napisz do:
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zakup planu treningowego</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
-            text-align: center;
-        }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px 0;
-        }
-        header h1 {
-            margin: 0;
-        }
-        .content {
-            margin: 20px auto;
-            max-width: 600px;
-            padding: 20px;
-            background: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-        .form-group input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-            border: none;
-        }
-        .form-group input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Zakup planu treningowego</h1>
-        <p>Wypełnij poniższy formularz, aby zakupić swój spersonalizowany plan treningowy.</p>
-    </header>
-
-    <div class="content">
-        <form id="training-plan-form" action="backend_endpoint_here" method="POST">
-            <!-- Dane użytkownika -->
-            <div class="form-group">
-                <label for="name">Imię i nazwisko:</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Adres e-mail:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="age">Wiek:</label>
-                <input type="number" id="age" name="age" required>
-            </div>
-            <div class="form-group">
-                <label for="gender">Płeć:</label>
-                <select id="gender" name="gender" required>
-                    <option value="male">Mężczyzna</option>
-                    <option value="female">Kobieta</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="goal">Cel treningowy:</label>
-                <select id="goal" name="goal" required>
-                    <option value="weight_loss">Utrata wagi</option>
-                    <option value="muscle_gain">Przyrost mięśni</option>
-                    <option value="general_fitness">Ogólna kondycja</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="payment">Kwota: 199,99 zł</label>
-                <!-- Możliwość płatności, np. przycisk PayPal lub Stripe -->
-                <input type="submit" value="Przejdź do płatności">
-            </div>
-        </form>
-    </div>
-
-    <footer>
-        © 2025 TwojeImię - Wszystkie prawa zastrzeżone.
-    </footer>
-
-    <script>
-        document.getElementById('training-plan-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const formData = new FormData(this);
-
-            // Wysyłanie danych na backend (np. do systemu płatności i generowania planu)
-            fetch('backend_endpoint_here', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Płatność zakończona sukcesem! Plan treningowy zostanie wysłany na Twój e-mail.');
-                } else {
-                    alert('Wystąpił błąd podczas płatności. Spróbuj ponownie.');
-                }
-            })
-            .catch(error => {
-                alert('Wystąpił błąd. Spróbuj ponownie.');
-            });
-        });
-    </script>
 </body>
 </html>
-<!-- Dodaj przycisk do płatności PayPal pod formularzem -->
-<div class="form-group">
-    <label for="payment">Kwota: 49,99 zł</label>
-    <a href="https://www.paypal.com/paypalme/yourpaypalme/199.99" target="_blank">
-        <input type="button" value="Kup teraz przez PayPal" style="background-color: #4CAF50; color: white; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-    </a>
-</div>
-<!-- Formularz zapisu do newslettera -->
-<div class="newsletter">
-    <h3>Zapisz się na newsletter, aby otrzymywać plany treningowe i promocje!</h3>
-    <form id="newsletter-form">
-        <input type="email" id="email" placeholder="Wprowadź swój email" required>
-        <input type="submit" value="Zapisz się">
-    </form>
-</div>
-<script>
-    // Formularz newslettera
-    document.getElementById('newsletter-form').addEventListener('submit', function(event) {
-        event.preventDefault();
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+}
 
-        const email = document.getElementById('email').value;
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
 
-        // Przykład wysyłki danych z formularza newslettera
-        fetch('twojbackendemail@domena.com', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email: email })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Dziękujemy za zapisanie się do newslettera!');
-            } else {
-                alert('Wystąpił błąd. Spróbuj ponownie.');
-            }
-        })
-        .catch(error => {
-            alert('Wystąpił błąd. Spróbuj ponownie.');
-        });
-    });
+nav ul {
+    list-style: none;
+    padding: 0;
+}
 
-    // Formularz zakupu planu treningowego
-    document.getElementById('training-plan-form').addEventListener('submit', function(event) {
-        event.preventDefault();
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
 
-        const formData = new FormData(this);
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
 
-        // Wysyłanie danych na backend (np. do systemu płatności i generowania planu)
-        fetch('backend_endpoint_here', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Płatność zakończona sukcesem! Plan treningowy zostanie wysłany na Twój e-mail.');
-            } else {
-                alert('Wystąpił błąd podczas płatności. Spróbuj ponownie.');
-            }
-        })
-        .catch(error => {
-            alert('Wystąpił błąd. Spróbuj ponownie.');
-        });
-    });
-</script>
-Wysłano
-Napisz do:
-<script>
-    // Formularz newslettera
-    document.getElementById('newsletter-form').addEventListener('submit', function(event) {
-        event.preventDefault();
+section {
+    padding: 20px;
+    margin: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-        const email = document.getElementById('email').value;
+.buy-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
 
-        // Przykład wysyłki danych z formularza newslettera
-        fetch('twojbackendemail@domena.com', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email: email })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Dziękujemy za zapisanie się do newslettera!');
-            } else {
-                alert('Wystąpił błąd. Spróbuj ponownie.');
-            }
-        })
-        .catch(error => {
-            alert('Wystąpił błąd. Spróbuj ponownie.');
-        });
-    });
-
-    // Formularz zakupu planu treningowego
-    document.getElementById('training-plan-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const formData = new FormData(this);
-
-        // Wysyłanie danych na backend (np. do systemu płatności i generowania planu)
-        fetch('backend_endpoint_here', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Płatność zakończona sukcesem! Plan treningowy zostanie wysłany na Twój e-mail.');
-            } else {
-                alert('Wystąpił błąd podczas płatności. Spróbuj ponownie.');
-            }
-        })
-        .catch(error => {
-            alert('Wystąpił błąd. Spróbuj ponownie.');
-        });
-    });
-</script>
-Wysłano
-Napisz do:
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zakup planu treningowego</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
-            text-align: center;
-        }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px 0;
-        }
-        header h1 {
-            margin: 0;
-        }
-        .content {
-            margin: 20px auto;
-            max-width: 700px;
-            padding: 20px;
-            background: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            text-align: left;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-        .form-group input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-            border: none;
-            width: 100%;
-            padding: 15px;
-            font-size: 18px;
-            border-radius: 5px;
-        }
-        .form-group input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-        .plan-image {
-            margin: 20px auto;
-            max-width: 80%;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        footer {
-            margin-top: 30px;
-            padding: 10px 0;
-            background: #333;
-            color: white;
-            font-size: 14px;
-        }
-        footer a {
-            color: #4CAF50;
-            text-decoration: none;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Zakup planu treningowego</h1>
-        <p>Wypełnij poniższy formularz, aby zakupić spersonalizowany plan treningowy.</p>
-    </header>
-
-    <div class="content">
-        <img src="plan_treningowy.jpg" alt="Plan treningowy" class="plan-image">
-        <h2>Spersonalizowany plan treningowy</h2>
-        <p>Jeśli chcesz poprawić swoją kondycję, przyrost mięśni, lub zrzucić wagę, ten plan treningowy jest właśnie dla Ciebie. Wypełnij formularz poniżej, aby go zakupić i otrzymać na swój e-mail.</p>
-        
-        <form id="training-plan-form" action="backend_endpoint_here" method="POST">
-            <!-- Dane użytkownika -->
-            <div class="form-group">
-                <label for="name">Imię i nazwisko:</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Adres e-mail:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="age">Wiek:</label>
-                <input type="number" id="age" name="age" required>
-            </div>
-            <div class="form-group">
-                <label for="gender">Płeć:</label>
-                <select id="gender" name="gender" required>
-                    <option value="male">Mężczyzna</option>
-                    <option value="female">Kobieta</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="goal">Cel treningowy:</label>
-                <select id="goal" name="goal" required>
-                    <option value="weight_loss">Utrata wagi</option>
-                    <option value="muscle_gain">Przyrost mięśni</option>
-                    <option value="general_fitness">Ogólna kondycja</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="payment">Kwota: 49,99 zł</label>
-                <input type="submit" value="Przejdź do płatności">
-            </div>
-        </form>
-    </div>
-
-    <footer>
-        © 2025 TwojeImię - Wszystkie prawa zastrzeżone. <br>
-        <a href="mailto:your_email@example.com">Skontaktuj się z nami</a>
-    </footer>
-
-    <script>
-        document.getElementById('training-plan-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const formData = new FormData(this);
-
-            fetch('backend_endpoint_here', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Płatność zakończona sukcesem! Plan treningowy zostanie wysłany na Twój e-mail.');
-                } else {
-                    alert('Wystąpił błąd podczas płatności. Spróbuj ponownie.');
-                }
-Wysłano
-Napisz do:
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
