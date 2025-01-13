@@ -157,3 +157,25 @@
     </script>
 </body>
 </html>
+<!-- Nowy produkt - Dodaj do koszyka -->
+<div class="content">
+    <h2>E-book: Przepisy na Szybkie Obiady</h2>
+    <p>
+        30 prostych przepisów na szybkie obiady w 30 minut!
+    </p>
+    <p>
+        Cena: <strong>14.99 PLN</strong>
+    </p>
+    <button class="button" onclick="addToCart('E-book Przepisy na Szybkie Obiady', 14.99)">Dodaj do koszyka</button>
+</div>
+
+<!-- Możliwość wyświetlania zawartości koszyka -->
+<div class="cart-items">
+    <h3>Twój Koszyk:</h3>
+    <ul id="cart-list">
+        <!-- Lista produktów w koszyku -->
+    </ul>
+    <p class="total-price">Całkowita cena: <span id="total-price">0</span> PLN</p>
+    <button id="clear-cart" onclick="clearCart()" style="display:none;">Wyczyść koszyk</button>
+    <a id="checkout-btn" href="https://www.paypal.com/paypalme/TwojeKontoPayPal/19.99" class="button" style="display:none;">Przejdź do płatności</a>
+</div>
