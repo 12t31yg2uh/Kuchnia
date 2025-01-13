@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sprzedaż E-booka</title>
+    <title>Ćwiczenia Fizyczne - Plany i Rozpiski</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,395 +23,132 @@
         }
         .content {
             margin: 20px auto;
-            max-width: 800px;
+            max-width: 900px;
             padding: 20px;
             background: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
         }
-        .button {
-            display: inline-block;
+        .exercise-category {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .exercise-category div {
             background-color: #4CAF50;
             color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 18px;
-            margin-top: 20px;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 30%;
+            cursor: pointer;
         }
-        .button:hover {
+        .exercise-category div:hover {
             background-color: #45a049;
         }
+        .exercise-list {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .exercise-item {
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 15px;
+            width: 45%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .exercise-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
         footer {
-            margin-top: 20px;
+            margin-top: 30px;
             padding: 10px 0;
             background: #333;
             color: white;
             font-size: 14px;
         }
-        .cart {
-            margin-top: 30px;
-            text-align: left;
-        }
-        .cart-items {
-            border-top: 1px solid #ddd;
+        .newsletter {
             margin-top: 20px;
-            padding-top: 10px;
         }
-        .cart-items ul {
-            list-style-type: none;
-            padding: 0;
+        .newsletter input[type="email"] {
+            padding: 10px;
+            border-radius: 5px;
+            width: 250px;
         }
-        .cart-items li {
-            margin-bottom: 10px;
+        .newsletter input[type="submit"] {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
-        .total-price {
-            font-size: 18px;
-            font-weight: bold;
+        .newsletter input[type="submit"]:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Mój E-book Kulinarne Inspiracje</h1>
+        <h1>Ćwiczenia Fizyczne - Plany i Rozpiski</h1>
+        <p>Znajdź idealne ćwiczenia dla siebie i popraw swoją kondycję!</p>
     </header>
+
     <div class="content">
-        <h2>Gotuj łatwo i smacznie</h2>
-        <p>
-            Poznaj 50 sprawdzonych przepisów na każdą okazję! 
-            E-book zawiera szczegółowe instrukcje, zdjęcia i wiele inspiracji kulinarnych.
-        </p>
-        <p>
-            Cena: <strong>19.99 PLN</strong>
-        </p>
-        <button class="button" onclick="addToCart('E-book Kulinarne Inspiracje', 19.99)">Dodaj do koszyka</button>
-        
-        <!-- Sekcja koszyka -->
-        <div class="cart">
-            <h3>Twój koszyk:</h3>
-            <div class="cart-items">
-                <ul id="cart-list"></ul>
-                <p class="total-price">Całkowita cena: <span id="total-price">0.00</span> PLN</p>
-                <button class="button" id="checkout" style="display: none;" onclick="checkout()">Przejdź do płatności</button>
-                <button class="button" id="clear-cart" style="display: none;" onclick="clearCart()">Wyczyść koszyk</button>
-            </div>
+        <h2>Wybierz kategorię ćwiczeń</h2>
+        <div class="exercise-category">
+            <div onclick="showExercises('cardio')">Cardio</div>
+            <div onclick="showExercises('strength')">Siłowe</div>
+            <div onclick="showExercises('flexibility')">Elastyczność</div>
+        </div>
+
+        <div class="exercise-list" id="exercise-list">
+            <!-- Lista ćwiczeń zostanie załadowana tutaj -->
+        </div>
+
+        <div class="newsletter">
+            <h3>Zapisz się na newsletter, aby otrzymywać plany treningowe!</h3>
+            <form id="newsletter-form">
+                <input type="email" id="email" placeholder="Wprowadź swój email" required>
+                <input type="submit" value="Zapisz się">
+            </form>
         </div>
     </div>
+
     <footer>
         © 2025 TwojeImię - Wszystkie prawa zastrzeżone.
     </footer>
 
     <script>
-        // Koszyk w pamięci przeglądarki
-        const cart = [];
+        const exercises = {
+            cardio: [
+                { title: "Bieganie", description: "Wspaniałe ćwiczenie na poprawę kondycji." },
+                { title: "Skakanka", description: "Świetne na spalanie tłuszczu i poprawę wydolności." },
+                { title: "Rower stacjonarny", description: "Skuteczna forma ćwiczeń cardio na nogi." },
+            ],
+            strength: [
+                { title: "Pompki", description: "Wzmacniają klatkę piersiową, ramiona i triceps." },
+                { title: "Przysiady", description: "Ćwiczenie na nogi i pośladki." },
+                { title: "Martwy ciąg", description: "Siłowe ćwiczenie na plecy i nogi." },
+            ],
+            flexibility: [
+                { title: "Stretching", description: "Zwiększa elastyczność mięśni i poprawia mobilność." },
+                { title: "Yoga", description: "Skuteczne ćwiczenia na elastyczność i równowagę." },
+                { title: "Pilates", description: "Pomaga w poprawie postawy i elastyczności." },
+            ]
+        };
 
-        // Dodaj produkt do koszyka
-        function addToCart(name, price) {
-            cart.push({ name, price });
-            updateCart();
-        }
+        function showExercises(category) {
+            const exerciseList = document.getElementById('exercise-list');
+            exerciseList.innerHTML = '';
 
-        // Zaktualizuj widok koszyka
-        function updateCart() {
-            const cartList = document.getElementById('cart-list');
-            const totalPrice = document.getElementById('total-price');
-            const checkoutButton = document.getElementById('checkout');
-            const clearCartButton = document.getElementById('clear-cart');
-
-            // Wyczyść widok koszyka
-            cartList.innerHTML = '';
-
-            let total = 0;
-
-            cart.forEach((item, index) => {
-                total += item.price;
-                const li = document.createElement('li');
-                li.innerHTML = `${item.name} - ${item.price.toFixed(2)} PLN 
-                <button onclick="removeFromCart(${index})">Usuń</button>`;
-                cartList.appendChild(li);
-            });
-
-            totalPrice.textContent = total.toFixed(2);
-            checkoutButton.style.display = cart.length > 0 ? 'inline-block' : 'none';
-            clearCartButton.style.display = cart.length > 0 ? 'inline-block' : 'none';
-        }
-
-        // Usuń produkt z koszyka
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCart();
-        }
-
-        // Wyczyść koszyk
-        function clearCart() {
-            cart.length = 0;
-            updateCart();
-        }
-
-        // Przejdź do płatności
-        function checkout() {
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            const paymentLink = https://www.paypal.com/paypalme/TwojeKontoPayPal/${total.toFixed(2)};
-            window.location.href = paymentLink;
-        }
-    </script>
-</body>
-</html>
-<!-- Nowy produkt - Dodaj do koszyka -->
-<div class="content">
-    <h2>E-book: Przepisy na Szybkie Obiady</h2>
-    <p>
-        30 prostych przepisów na szybkie obiady w 30 minut!
-    </p>
-    <p>
-        Cena: <strong>14.99 PLN</strong>
-    </p>
-    <button class="button" onclick="addToCart('E-book Przepisy na Szybkie Obiady', 14.99)">Dodaj do koszyka</button>
-</div>
-
-<!-- Możliwość wyświetlania zawartości koszyka -->
-<div class="cart-items">
-    <h3>Twój Koszyk:</h3>
-    <ul id="cart-list">
-        <!-- Lista produktów w koszyku -->
-    </ul>
-    <p class="total-price">Całkowita cena: <span id="total-price">0</span> PLN</p>
-    <button id="clear-cart" onclick="clearCart()" style="display:none;">Wyczyść koszyk</button>
-    <a id="checkout-btn" href="https://www.paypal.com/paypalme/TwojeKontoPayPal/19.99" class="button" style="display:none;">Przejdź do płatności</a>
-</div>
-<!-- Formularz rejestracji -->
-<div class="content">
-    <h2>Zarejestruj się</h2>
-    <form id="register-form">
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" required><br><br>
-
-        <label for="password">Hasło:</label>
-        <input type="password" id="password" name="password" required><br><br>
-
-        <button type="submit" class="button">Zarejestruj się</button>
-    </form>
-</div>
-
-<!-- Formularz logowania -->
-<div class="content">
-    <h2>Zaloguj się</h2>
-    <form id="login-form">
-        <label for="login-email">E-mail:</label>
-        <input type="email" id="login-email" name="email" required><br><br>
-
-        <label for="login-password">Hasło:</label>
-        <input type="password" id="login-password" name="password" required><br><br>
-
-        <button type="submit" class="button">Zaloguj się</button>
-    </form>
-</div>
-Wysłano
-Napisz do:
-<!-- Formularz do dodawania przepisu -->
-<div class="content">
-    <h2>Podziel się przepisem</h2>
-    <form id="recipe-form">
-        <label for="recipe-title">Tytuł przepisu:</label>
-        <input type="text" id="recipe-title" name="title" required><br><br>
-
-        <label for="recipe-description">Opis przepisu:</label><br>
-        <textarea id="recipe-description" name="description" rows="4" required></textarea><br><br>
-
-        <label for="recipe-image">Dodaj zdjęcie:</label>
-        <input type="file" id="recipe-image" name="image"><br><br>
-
-        <button type="submit" class="button">Prześlij przepis</button>
-    </form>
-</div>
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sprzedaż E-booka</title>
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #fff8f0;
-            color: #5a5a5a;
-            text-align: center;
-            background-image: url('background_kitchen.jpg'); /* Tło związane z kuchnią */
-            background-size: cover;
-            background-position: center;
-        }
-        header {
-            background-color: #f5a623;
-            color: white;
-            padding: 30px 0;
-            border-bottom: 5px solid #d88d0d;
-        }
-        header h1 {
-            font-family: 'Lobster', cursive;
-            margin: 0;
-            font-size: 40px;
-        }
-        .content {
-            margin: 20px auto;
-            max-width: 800px;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-        .content:hover {
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
-        }
-        .button {
-            display: inline-block;
-            background-color: #f5a623;
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 25px;
-            font-size: 18px;
-            transition: background-color 0.3s ease;
-            margin-top: 30px;
-        }
-        .button:hover {
-            background-color: #e58f00;
-        }
-        footer {
-            margin-top: 20px;
-            padding: 15px 0;
-            background-color: #5a5a5a;
-            color: white;
-            font-size: 14px;
-            text-align: center;
-        }
-        .social-media a {
-            color: #5a5a5a;
-            font-size: 20px;
-            margin: 10px;
-            text-decoration: none;
-        }
-        .social-media a:hover {
-            color: #f5a623;
-        }
-        .gallery {
-            margin-top: 50px;
-        }
-        .gallery img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-</head>
-<body>
-    <header>
-        <h1>Kulinarne Inspiracje - E-book</h1>
-    </header>
-
-    <div class="content">
-        <h2>Gotuj łatwo i smacznie</h2>
-        <p>
-            50 wyjątkowych przepisów na każdą okazję. Zainspiruj się i stwórz coś pysznego w swojej kuchni!
-        </p>
-        <p>
-            Cena: <strong>19.99 PLN</strong>
-        </p>
-        <a href="https://www.paypal.com/paypalme/TwojeKontoPayPal/19.99" class="button">Kup teraz</a>
-    </div>
-
-    <div class="gallery">
-        <h2>Galeria Przepisów</h2>
-        <img src="image1.jpg" alt="Przepis 1">
-        <img src="image2.jpg" alt="Przepis 2">
-    </div>
-
-    <footer>
-        © 2025 TwojeImię - Wszystkie prawa zastrzeżone.
-        <div class="social-media">
-            <a href="https://facebook.com" target="_blank">Facebook</a>
-            <a href="https://twitter.com" target="_blank">Twitter</a>
-            <a href="https://instagram.com" target="_blank">Instagram</a>
-        </div>
-    </footer>
-</body>
-</html>
-<div class="reviews">
-    <h2>Opinie o e-booku</h2>
-    <div class="review">
-        <p><strong>Anna K.</strong> - "Świetny e-book, łatwe przepisy i przepyszne dania!"</p>
-    </div>
-    <div class="review">
-        <p><strong>Jan M.</strong> - "Bardzo pomocne i szybkie przepisy. Polecam!"</p>
-    </div>
-    <!-- Dodaj więcej recenzji w miarę potrzeby -->
-</div>
-<button class="button animate__animated animate__bounceIn">Kup teraz</button>
-@media screen and (max-width: 768px) {
-    body {
-        font-size: 16px;
-    }
-
-    .content {
-        margin: 10px;
-        padding: 15px;
-    }
-
-    .cart-items {
-        font-size: 14px;
-    }
-}
-body {
-    background-image: url('background1.jpg');
-    background-size: cover;
-    background-position: center;
-    animation: backgroundChange 10s infinite alternate;
-}
-
-@keyframes backgroundChange {
-    0% { background-image: url('background1.jpg'); }
-    50% { background-image: url('background2.jpg'); }
-    100% { background-image: url('background3.jpg'); }
-}
-.parallax {
-    background-image: url('parallax-bg.jpg');
-    height: 500px;
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
-}
-
-.parallax h2 {
-    text-align: center;
-    color: white;
-    padding-top: 200px;
-}
-<div class="recipe-cards">
-    <div class="recipe-card">
-        <img src="recipe1.jpg" alt="Recipe 1">
-        <h3>Przepis 1</h3>
-        <p>Opis przepisu...</p>
-    </div>
-    <div class="recipe-card">
-        <img src="recipe2.jpg" alt="Recipe 2">
-        <h3>Przepis 2</h3>
-        <p>Opis przepisu...</p>
-    </div>
-    <!-- Dodaj więcej kart -->
-</div>
-Wysłano
-Napisz do:
-<div class="icon">
-    <a href="#"><img src="knife-icon.png" class="animate-knife" alt="Knife Icon"></a>
-</div>
-<div class="recipe-guide">
-    <button onclick="window.location.href='#soups'">Zupy</button>
-    <button onclick="window.location.href='#main-courses'">Dania Główne</button>
-    <button onclick="window.location.href='#desserts'">Desery</button>
-</div>
+            exercises[category].forEach(exercise => {
+                const div = document
 Wysłano
 Napisz do:
