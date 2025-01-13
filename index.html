@@ -166,3 +166,57 @@ footer {
         width: 100%;
     }
 }
+/* Animacje dla przycisków */
+.buy-button {
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.buy-button:hover {
+    background-color: #2ecc71;
+    transform: scale(1.05);
+}
+
+/* Animacja dla sekcji przy przewijaniu strony */
+section {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+<script>
+    window.addEventListener('scroll', function() {
+        const sections = document.querySelectorAll('section');
+        sections.forEach((section) => {
+            if (section.getBoundingClientRect().top < window.innerHeight) {
+                section.classList.add('visible');
+            }
+        });
+    });
+</script>
+/* Tło dla sekcji */
+section#home {
+    background-image: url('background-image.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    padding: 100px 20px;
+    color: white;
+}
+<section id="newsletter">
+    <h2>Zapisz się na nasz newsletter</h2>
+    <p>Otrzymuj informacje o nowych przepisach oraz promocjach!</p>
+    <form action="#" method="POST">
+        <input type="email" name="email" placeholder="Wprowadź swój e-mail" required>
+        <input type="submit" value="Zapisz się">
+    </form>
+</section>
+Wysłano
+<section id="hero">
+    <h2>Przepisy kulinarne, które pokochasz!</h2>
+    <p>W naszym e-booku znajdziesz najlepsze przepisy na zdrowe i smaczne dania.</p>
+    <a href="#ebook" class="cta-button">Kup teraz</a>
+</section>
